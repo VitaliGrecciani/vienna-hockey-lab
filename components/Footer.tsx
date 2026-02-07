@@ -54,7 +54,7 @@ const Footer: React.FC<FooterProps> = ({ onShowLegal }) => {
       {/* Нижняя плашка */}
       <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-gray-950 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-700 uppercase tracking-[0.2em] font-bold">
         <p>© {new Date().getFullYear()} VIENNA HOCKEY LAB</p>
-        <p>Built by VIKI Intelligence</p>
+        <p>Built by Grecciani Lab</p>
       </div>
     </footer>
   );
