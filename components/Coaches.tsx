@@ -6,20 +6,20 @@ const coaches: Coach[] = [
   {
     name: "Dmitry Tabatadze",
     role: "Head Coach",
-    experience: ["CSKA Moscow", "VHL Professional", "MHL", "KHL Experience"],
-    image: "/coach-dmitry.jpg" // Ждет файл в public
+    experience: ["CSKA Moscow school", "Played in Russian Professional Leagues MHL/VHL/KHL", "Licensed hockey coach"],
+    image: "/coach-dmitry.jpg"
   },
   {
     name: "Kirill Kurochkin",
     role: "Skills Specialist",
-    experience: ["Avangard Omsk School", "Vienna Capitals Coach"],
-    image: "/coach-kirill.jpg" // Ждет файл в public
+    experience: ["Avangard Omsk School", "Vienna Capitals u18-20 pro-coach", "Licensed hockey coach"],
+    image: "/coach-kirill.jpg"
   },
   {
-    name: "Vladimir Bondorenko",
+    name: "Vladimir Borodenko",
     role: "Development Coach",
-    experience: ["USA Leagues", "Czech Republic Pro Experience"],
-    image: "/coach-vladimir.jpg" // Ждет файл в public
+    experience: ["Played in USA Leagues", "Czech Republic League pro experienced"],
+    image: "/coach-vladimir.jpg"
   }
 ];
 
@@ -38,7 +38,7 @@ const CoachCard: React.FC<{ coach: Coach, index: number }> = ({ coach, index }) 
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="relative w-40 h-40 mb-6 perspective-1000">
-        <motion.div 
+        <motion.div
           className="w-full h-full relative"
           animate={{ rotateY: isHovered ? 180 : 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -63,7 +63,7 @@ const CoachCard: React.FC<{ coach: Coach, index: number }> = ({ coach, index }) 
           <li key={i} className="border-b border-white/5 pb-1">{exp}</li>
         ))}
       </ul>
-      
+
       {/* Background flare effect */}
       <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-red-600/10 blur-3xl rounded-full group-hover:bg-red-600/20 transition-all duration-700" />
     </motion.div>

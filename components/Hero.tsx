@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
   const springConfig = { damping: 40, stiffness: 90, mass: 2.5 };
   const rotateX = useSpring(useTransform(y, [-500, 500], [15, -15]), springConfig);
   const rotateY = useSpring(useTransform(x, [-500, 500], [-15, 15]), springConfig);
-  
+
   const logoX = useSpring(useTransform(x, [-500, 500], [-15, 15]), springConfig);
   const logoY = useSpring(useTransform(y, [-500, 500], [-15, 15]), springConfig);
 
@@ -33,7 +33,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section 
+    <section
       className="relative min-h-screen flex flex-col items-center justify-start text-center px-4 py-8 md:py-12 overflow-hidden bg-transparent"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -47,31 +47,25 @@ const Hero: React.FC = () => {
         className="z-10 flex flex-col items-center w-full max-w-[90rem]"
       >
         {/* ULTRA GLASSY 3D LOGO - REFINED */}
-        <motion.div 
-          style={{ 
-            rotateX, 
-            rotateY, 
+        <motion.div
+          style={{
             transformStyle: "preserve-3d"
           }}
           className="w-32 h-32 md:w-56 md:h-56 rounded-full flex items-center justify-center relative cursor-pointer mb-6 md:mb-8 
-                     bg-white/5 backdrop-blur-xl shadow-[inset_0_0_20px_rgba(255,255,255,0.05),0_0_40px_rgba(255,255,255,0.05)] overflow-hidden"
+                     bg-white/5 backdrop-blur-xl shadow-[0_0_50px_rgba(255,0,0,0.1),inset_0_0_20px_rgba(255,255,255,0.1)] overflow-hidden border-2 border-lab-red"
         >
-             <motion.img 
-               src="/logo.jpg" 
-               alt="Vienna Hockey Lab Logo" 
-               style={{ 
-                 x: logoX, 
-                 y: logoY, 
-                 scale: 1.65 
-               }}
-               className="w-full h-full object-cover rounded-full z-10 mix-blend-screen brightness-110 contrast-125"
-             />
+          <img
+            src="/logo.jpg"
+            alt="Vienna Hockey Lab Logo"
+            style={{ transform: 'scale(1.55)' }}
+            className="w-full h-full object-cover rounded-full z-10 mix-blend-screen contrast-125 opacity-100"
+          />
 
-             {/* Soft Glass Sheen */}
-             <div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-40"></div>
-             
-             {/* Subtle Inner Rim (No hard border) */}
-             <div className="absolute inset-0 rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] z-30 pointer-events-none"></div>
+          {/* Strong Glass Sheen */}
+          <div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-tr from-white/20 via-transparent to-transparent opacity-50"></div>
+
+          {/* Subtle Inner Rim */}
+          <div className="absolute inset-0 rounded-full shadow-[inset_0_2px_4px_rgba(255,255,255,0.3)] z-30 pointer-events-none"></div>
         </motion.div>
 
         {/* Typography */}

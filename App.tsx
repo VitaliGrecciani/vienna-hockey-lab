@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import TrainingFocus from './components/TrainingFocus';
 import Coaches from './components/Coaches';
+import Services from './components/Services';
 import RegistrationForm from './components/RegistrationForm';
 import Footer from './components/Footer';
 import Legal from './components/Legal';
@@ -15,10 +16,11 @@ const App: React.FC = () => {
   return (
     <main className="relative min-h-screen text-white">
       <FractalBackground />
-      
+
       <div className="relative z-0">
         <Hero />
         <About />
+        <Services />
         <TrainingFocus />
         <Coaches />
         <RegistrationForm />
