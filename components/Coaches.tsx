@@ -23,13 +23,13 @@ const coaches: Coach[] = [
     name: "Kirill Kurochkin",
     role: "Skills Specialist",
     experience: ["Avangard Omsk School", "Vienna Capitals u18-20 pro-coach", "Licensed hockey coach"],
-    image: "/coach-kirill.jpg"
+    image: "/coach-vladimir.jpg" // Swapped: This is actually Kirill (bearded)
   },
   {
     name: "Vladimir Borodenko",
     role: "Development Coach",
     experience: ["Played in USA Leagues", "Czech Republic League pro experienced"],
-    image: "/coach-vladimir.jpg"
+    image: "/coach-kirill.jpg" // Swapped: This is actually Vladimir (in white)
   }
 ];
 
