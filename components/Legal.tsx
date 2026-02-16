@@ -3,14 +3,14 @@ import { motion } from 'framer-motion';
 
 const Legal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl overflow-y-auto p-6 md:p-12 text-gray-300 font-sans"
     >
       <div className="max-w-4xl mx-auto relative">
-        <button 
+        <button
           onClick={onClose}
           className="fixed top-8 right-8 text-white hover:text-red-600 text-4xl z-[110]"
         >
@@ -22,20 +22,23 @@ const Legal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             Legal <span className="text-red-600">Notice</span> (Impressum)
           </h1>
           <div className="space-y-4 text-sm leading-relaxed">
-            <p><strong>Information according to § 5 ECG, § 14 UGB and § 25 MedienG.</strong></p>
+            <p><strong>Information according to § 5 ECG and § 25 MedienG.</strong></p>
             <p>
-              <strong>Operator and Owner:</strong> Dmitry Tabatadze<br />
-              <strong>Address:</strong> EisRing Süd, Wienerbergstraße 11, 1100 Vienna, Austria<br />
+              <strong>Name of Association:</strong> Vienna Hockey Lab<br />
+              <strong>ZVR-Zahl:</strong> 1999424312<br />
+              <strong>Legal Form:</strong> Verein (Association)<br />
+              <strong>Address (Sitz):</strong> Dresdner Straße 107/4.04, 1200 Wien, Österreich<br />
+              <br />
+              <strong>Statutory Representatives (Vorstand):</strong><br />
+              Dmitry Tabatadze, Sofiia Grechanaia (Joint representation)<br />
+              <br />
               <strong>Contact:</strong><br />
-              Phone: +43 677 64452839<br />
-              Email: Tabatadzewt@gmail.com<br />
+              Email: office@viennahockeylab.at<br />
               Web: vienna-hockey-lab.at
             </p>
             <p>
-              <strong>Professional Information:</strong><br />
-              Member of: WKO (Wirtschaftskammer Österreich)<br />
-              Applicable Legislation: Gewerbeordnung (www.ris.bka.gv.at)<br />
-              Authority according to ECG: Magistratisches Bezirksamt X. Bezirk (Favoriten)
+              <strong>Competent Authority (Aufsichtsbehörde):</strong><br />
+              Landespolizeidirektion Wien, Referat Vereins-, Versammlungs- und Medienrechtsangelegenheiten
             </p>
             <p className="pt-4 italic border-t border-gray-800">
               <strong>Disclaimer:</strong> The content of this website has been created with the greatest possible care. However, we do not guarantee the accuracy, completeness, or timeliness of the content provided.
@@ -70,7 +73,7 @@ const Legal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             </div>
             <div>
               <h3 className="text-white font-bold mb-2 uppercase">6. Your Rights</h3>
-              <p>According to the GDPR, you have the right to access, rectification, erasure, and restriction of processing of your personal data. To exercise these rights, contact us at Tabatadzewt@gmail.com.</p>
+              <p>According to the GDPR, you have the right to access, rectification, erasure, and restriction of processing of your personal data. To exercise these rights, contact us at office@viennahockeylab.at.</p>
             </div>
           </div>
         </section>

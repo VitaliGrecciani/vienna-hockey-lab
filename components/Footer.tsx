@@ -42,21 +42,18 @@ const Footer: React.FC<FooterProps> = ({ onShowLegal }) => {
               EisRing Süd, Vienna
             </a>
           </div>
-          <a href="mailto:contact@viennahockeylab.com" className="text-gray-400 hover:text-white transition-colors font-medium">
-            contact@viennahockeylab.com
+          <a href="mailto:office@viennahockeylab.at" className="text-gray-400 hover:text-white transition-colors font-medium">
+            office@viennahockeylab.at
           </a>
-          <div className="flex gap-4 mt-4 text-[10px] uppercase tracking-widest text-gray-600 font-bold">
-            <button onClick={onShowLegal} className="hover:text-red-600 transition-colors">Legal Notice</button>
-            <span className="text-gray-800">|</span>
-            <button onClick={onShowLegal} className="hover:text-red-600 transition-colors">Privacy Policy</button>
-          </div>
         </div>
       </div>
 
       {/* Нижняя плашка */}
-      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-gray-950 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-700 uppercase tracking-[0.2em] font-bold">
-        <p>© {new Date().getFullYear()} VIENNA HOCKEY LAB</p>
-        <p>Built by Grecciani Lab</p>
+      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-gray-950 flex flex-col items-center gap-4 text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold text-center">
+        <p>
+          © 2026 Vienna Hockey Lab <span className="mx-2 text-gray-800">|</span> ZVR: 1999424312 <span className="mx-2 text-gray-800">|</span>
+          <button onClick={onShowLegal} className="hover:text-white transition-colors ml-2">Legal Notice & Privacy</button>
+        </p>
       </div>
     </footer>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 
 const About: React.FC = () => {
   return (
@@ -20,71 +20,174 @@ const About: React.FC = () => {
           <div className="h-1 w-24 bg-lab-red shadow-glow" />
         </motion.div>
 
-        {/* 3D Container for "Smartphone/Device" feel */}
-        <div className="relative group" style={{ perspective: "1000px" }}>
-          <motion.div
-            initial={{ opacity: 0, rotateY: 15, rotateX: 5, z: -50 }}
-            whileInView={{ 
-              opacity: 1, 
-              rotateY: 0, 
-              rotateX: 0, 
-              z: 0 
-            }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            
-            // "Living" idle animation (Floating in zero-g)
-            animate={{
-              y: [0, -8, 0],
-              rotateX: [0, 2, 0],
-              rotateY: [0, -2, 0]
-            }}
-            // @ts-ignore - Framer motion transition types work but TS can be strict here
-            transition={{
-              y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-              rotateX: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-              rotateY: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-              default: { duration: 0.5 }
-            }}
-
-            // Interaction State: Lift up and tilt towards user like a device in hand
-            whileHover={{ 
-              scale: 1.05,
-              rotateX: 5,  // Tilt back slightly
-              rotateY: -5, // Turn towards viewer
-              y: -15,      // Lift up
-              transition: { duration: 0.3, ease: "easeOut" }
-            }}
-
-            className="relative aspect-video bg-black border border-gray-800 drop-shadow-[0_0_30px_rgba(255,0,0,0.3)] hover:drop-shadow-[0_0_50px_rgba(255,0,0,0.6)] transition-shadow duration-500"
-            style={{
-              clipPath: "polygon(30px 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 30px)",
-              transformStyle: "preserve-3d"
-            }}
-          >
-            {/* Glare / Reflection Effect */}
-            <div className="absolute top-0 -left-[100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-25deg] group-hover:left-[200%] transition-all duration-1000 ease-in-out pointer-events-none z-20" />
-            
-            {/* Subtle Screen Texture/Noise */}
-            <div className="absolute inset-0 pointer-events-none opacity-20 z-10 mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
-
-            {/* Video Content - Reliable CDN Link */}
-            <video 
-              width="100%" 
-              height="100%" 
-              autoPlay 
-              loop 
-              muted 
-              playsInline
-              className="object-cover opacity-90 hover:opacity-100 transition-opacity duration-500 relative z-0 w-full h-full"
-            >
-              <source src="https://videos.pexels.com/video-files/8559263/8559263-hd_1920_1080_25fps.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </motion.div>
-        </div>
+        {/* Dynamic Video Container */}
+        <VideoPlayer />
       </div>
     </section>
+  );
+};
+
+const VideoPlayer = () => {
+  const [isVertical, setIsVertical] = React.useState(false);
+  const [videoLoaded, setVideoLoaded] = React.useState(false);
+  const [isMuted, setIsMuted] = React.useState(true);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  // Motion values
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // Smooth spring configuration
+  const springConfig = { damping: 20, stiffness: 200 };
+
+  // Transform mouse position into rotation
+  // Adjust output range to control tilt intensity (currently 15 degrees)
+  const rotateX = useSpring(useTransform(y, [-100, 100], [15, -15]), springConfig);
+  const rotateY = useSpring(useTransform(x, [-100, 100], [-15, 15]), springConfig);
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return;
+
+    const rect = containerRef.current.getBoundingClientRect();
+
+    // Calculate mouse position relative to center (range: -0.5 to 0.5)
+    // Then multiply by a factor (e.g., 200) to feed into transforms
+    const width = rect.width;
+    const height = rect.height;
+
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+
+    const xPct = (mouseX / width - 0.5) * 200;
+    const yPct = (mouseY / height - 0.5) * 200;
+
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent affecting the tilt or other interactions
+    if (videoRef.current) {
+      const newMutedState = !isMuted;
+      videoRef.current.muted = newMutedState;
+      setIsMuted(newMutedState);
+    }
+  };
+
+  const handleMetadata = () => {
+    if (videoRef.current) {
+      const { videoWidth, videoHeight } = videoRef.current;
+      setIsVertical(videoHeight > videoWidth);
+      setVideoLoaded(true);
+    }
+  };
+
+  return (
+    <motion.div
+      className="flex justify-center items-center py-10 perspective-1000"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+    >
+      <motion.div
+        ref={containerRef}
+        initial={{ opacity: 0, scale: 0.9, y: 50 }}
+        whileInView={{
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          transition: { duration: 0.8, ease: "easeOut" }
+        }}
+        viewport={{ once: true }}
+
+        // Use a simpler floating animation that doesn't conflict with tilt
+        animate={{
+          y: [0, -10, 0],
+        }}
+        transition={{
+          y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+        } as any}
+
+        whileHover={{
+          scale: 1.02,
+          transition: { duration: 0.3 }
+        }}
+
+        className={`
+          relative mx-auto bg-black transition-all duration-500 group cursor-grab active:cursor-grabbing
+          ${isVertical
+            ? "w-[300px] h-[600px] max-w-full max-h-[80vh] rounded-[3rem] border-[12px] border-gray-900 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+            : "w-full aspect-video rounded-xl border border-gray-800 drop-shadow-[0_0_30px_rgba(255,0,0,0.3)]"
+          }
+        `}
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        {/* Phone Notch (Only for Vertical) */}
+        {isVertical && (
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-black rounded-b-2xl z-30 flex justify-center items-center pointer-events-none">
+            <div className="w-12 h-1 bg-gray-800 rounded-full opacity-50"></div>
+          </div>
+        )}
+
+        {/* Mute Button Indicator */}
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={toggleMute}
+          className="absolute bottom-6 right-6 z-40 bg-black/60 backdrop-blur-md p-3 rounded-full border border-white/10 text-white hover:bg-black/80 transition-colors"
+          title={isMuted ? "Unmute" : "Mute"}
+        >
+          {isMuted ? (
+            // Muted Icon
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 9.75L19.5 12m0 0l2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6l4.72-4.72a.75.75 0 011.28.531V19.94a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.506-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.395C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+            </svg>
+          ) : (
+            // Unmuted Icon
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 text-lab-red">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.506-1.938-1.354A9.009 9.009 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+            </svg>
+          )}
+        </motion.button>
+
+        {/* Dynamic Glare Effect based on Mouse Position */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none z-20 rounded-[inherit]"
+          style={{
+            x: useTransform(x, [-100, 100], [-20, 20]),
+            y: useTransform(y, [-100, 100], [-20, 20]),
+            opacity: useTransform(x, [-100, 100], [0.2, 0.4])
+          }}
+        />
+
+        {/* Subtle Screen Texture/Noise */}
+        <div className="absolute inset-0 pointer-events-none opacity-20 z-10 mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')] rounded-[inherit]"></div>
+
+        {/* Video Content */}
+        <video
+          ref={videoRef}
+          onLoadedMetadata={handleMetadata}
+          autoPlay
+          loop
+          muted={isMuted} // Controlled by React state
+          playsInline
+          className={`w-full h-full object-cover pointer-events-none ${!videoLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-500 rounded-[inherit]`}
+        >
+          <source src="/video-hockey-lab.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </motion.div>
+    </motion.div>
   );
 };
 
