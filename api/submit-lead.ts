@@ -9,14 +9,14 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method Not Allowed' });
     }
 
-    const { name, phone, age, yearsInHockey, skillLevel, insight } = req.body;
+    const { name, email, phone, age, yearsInHockey, skillLevel, insight } = req.body;
 
     // Basic Validation
-    if (!name || !phone) {
+    if (!name || !phone || !email) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    console.log(`🚀 Processing lead: ${name} (${phone})`);
+    console.log(`🚀 Processing lead: ${name} (${email})`);
 
     const results = {
         email: 'pending',
@@ -34,6 +34,7 @@ export default async function handler(req, res) {
                 html: `
           <h1>New Athlete Registration</h1>
           <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
           <p><strong>Phone:</strong> ${phone}</p>
           <p><strong>Age:</strong> ${age}</p>
           <p><strong>Years in Hockey:</strong> ${yearsInHockey}</p>
@@ -60,6 +61,7 @@ export default async function handler(req, res) {
 🏒 *New Lead (Resend Pipeline)*
 
 👤 *Name:* ${name}
+📧 *Email:* ${email}
 📱 *Phone:* ${phone}
 🎂 *Age:* ${age}
 ⛸ *Years:* ${yearsInHockey}

@@ -13,6 +13,7 @@ export interface TrainingModule {
 
 export interface RegistrationData {
   name: string;
+  email: string;
   phone: string;
   age: number | '';
   yearsInHockey: number | '';

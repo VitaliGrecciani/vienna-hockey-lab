@@ -6,6 +6,7 @@ import { submitLead } from '../services/leadService';
 const RegistrationForm: React.FC = () => {
   const [formData, setFormData] = useState<RegistrationData & { gdprConsent: boolean, honeypot: string }>({
     name: '',
+    email: '',
     phone: '',
     age: '',
     yearsInHockey: '',
@@ -60,6 +61,12 @@ const RegistrationForm: React.FC = () => {
       return;
     }
 
+    if (name === 'email') {
+      setFormData(prev => ({ ...prev, [name]: value }));
+      if (errors.email) setErrors(prev => ({ ...prev, email: '' }));
+      return;
+    }
+
     if (name === 'phone') {
       const filtered = value.replace(/[^\d+()\-\s]/g, '');
       setFormData(prev => ({ ...prev, [name]: filtered }));
@@ -98,6 +105,11 @@ const RegistrationForm: React.FC = () => {
     // Manual Validation
     const newErrors: Record<string, string> = {};
     if (!formData.name.trim()) newErrors.name = "Full Name is required";
+
+    // Email Validation
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Invalid email format";
+
     if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
     if (!formData.age) newErrors.age = "Age is required";
     if (!formData.yearsInHockey) newErrors.yearsInHockey = "Years in Hockey is required";
@@ -136,6 +148,8 @@ const RegistrationForm: React.FC = () => {
     }
   };
 
+  const inputClasses = `w-full bg-black/50 border border-white/10 rounded-lg p-4 text-white placeholder-gray-500 focus:border-red-600 focus:bg-black/80 focus:outline-none transition-all`;
+
   return (
     <section id="registration" className="py-24 px-4 bg-transparent relative overflow-hidden">
       <div className="max-w-3xl mx-auto relative z-10">
@@ -171,14 +185,20 @@ const RegistrationForm: React.FC = () => {
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Full Name</label>
-                <input type="text" name="name" value={formData.name} onChange={handleChange} className={`w-full bg-white/5 border ${errors.name ? 'border-red-600' : 'border-white/10'} rounded-lg p-4 text-white placeholder-gray-600 focus:border-red-600 focus:bg-white/10 focus:outline-none transition-all`} placeholder="ALEX OVECHKIN" />
+                <input type="text" name="name" value={formData.name} onChange={handleChange} className={`${inputClasses} ${errors.name ? 'border-red-600' : ''}`} placeholder="ALEX OVECHKIN" />
                 {errors.name && <p className="text-red-600 text-[10px] mt-1 uppercase italic font-bold">{errors.name}</p>}
               </div>
               <div>
-                <label className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Phone (WhatsApp)</label>
-                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className={`w-full bg-white/5 border ${errors.phone ? 'border-red-600' : 'border-white/10'} rounded-lg p-4 text-white placeholder-gray-600 focus:border-red-600 focus:bg-white/10 focus:outline-none transition-all`} placeholder="+43 660 123 4567" />
-                {errors.phone && <p className="text-red-600 text-[10px] mt-1 uppercase italic font-bold">{errors.phone}</p>}
+                <label className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Email Address</label>
+                <input type="email" name="email" value={formData.email} onChange={handleChange} className={`${inputClasses} ${errors.email ? 'border-red-600' : ''}`} placeholder="alex8@caps.com" />
+                {errors.email && <p className="text-red-600 text-[10px] mt-1 uppercase italic font-bold">{errors.email}</p>}
               </div>
+            </div>
+
+            <div>
+              <label className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Phone (WhatsApp)</label>
+              <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className={`${inputClasses} ${errors.phone ? 'border-red-600' : ''}`} placeholder="+43 660 123 4567" />
+              {errors.phone && <p className="text-red-600 text-[10px] mt-1 uppercase italic font-bold">{errors.phone}</p>}
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
