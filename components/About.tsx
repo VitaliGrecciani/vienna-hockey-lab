@@ -126,7 +126,7 @@ const VideoPlayer = () => {
         className={`
           relative mx-auto bg-black transition-all duration-500 group cursor-grab active:cursor-grabbing
           ${isVertical
-            ? "w-[300px] h-[600px] max-w-full max-h-[80vh] rounded-[3rem] border-[12px] border-gray-900 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+            ? "w-[300px] h-[600px] max-w-full max-h-[80vh] rounded-[3rem] border-[12px] border-gray-900 shadow-[0_25px_60px_-10px_rgba(220,38,38,0.5)] drop-shadow-[0_0_20px_rgba(220,38,38,0.3)]"
             : "w-full aspect-video rounded-xl border border-gray-800 drop-shadow-[0_0_30px_rgba(255,0,0,0.3)]"
           }
         `}
