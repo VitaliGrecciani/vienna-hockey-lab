@@ -29,7 +29,7 @@ export default async function handler(req, res) {
         if (process.env.RESEND_API_KEY) {
             const emailResponse = await resend.emails.send({
                 from: 'Vienna Hockey Lab <onboarding@resend.dev>', // Update this if you have a custom domain
-                to: ['vienna.hockey.lab@gmail.com'], // Update to your real email
+                to: ['vitogr24@gmail.com'], // Updated to match Resend account for testing
                 subject: `New Application: ${name}`,
                 html: `
           <h1>New Athlete Registration</h1>
