@@ -33,7 +33,7 @@ const Legal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               Dmitry Tabatadze, Sofiia Grechanaia (Joint representation)<br />
               <br />
               <strong>Contact:</strong><br />
-              Email: office@viennahockeylab.at<br />
+              Email: office@viennahockeylab.com<br />
               Web: vienna-hockey-lab.at
             </p>
             <p>
@@ -73,7 +73,7 @@ const Legal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             </div>
             <div>
               <h3 className="text-white font-bold mb-2 uppercase">6. Your Rights</h3>
-              <p>According to the GDPR, you have the right to access, rectification, erasure, and restriction of processing of your personal data. To exercise these rights, contact us at office@viennahockeylab.at.</p>
+              <p>According to the GDPR, you have the right to access, rectification, erasure, and restriction of processing of your personal data. To exercise these rights, contact us at office@viennahockeylab.com.</p>
             </div>
           </div>
         </section>

@@ -42,8 +42,8 @@ const Footer: React.FC<FooterProps> = ({ onShowLegal }) => {
               EisRing Süd, Vienna
             </a>
           </div>
-          <a href="mailto:office@viennahockeylab.at" className="text-gray-400 hover:text-white transition-colors font-medium">
-            office@viennahockeylab.at
+          <a href="mailto:office@viennahockeylab.com" className="text-gray-400 hover:text-white transition-colors font-medium">
+            office@viennahockeylab.com
           </a>
         </div>
       </div>
