@@ -45,6 +45,9 @@ const Footer: React.FC<FooterProps> = ({ onShowLegal }) => {
           <a href="mailto:office@viennahockeylab.com" className="text-gray-400 hover:text-white transition-colors font-medium">
             office@viennahockeylab.com
           </a>
+          <p className="text-[10px] text-gray-500 max-w-[200px] leading-tight mt-4 italic">
+            We are currently moving to a new office! For all inquiries, please reach us via email. Training continues at EisRing Süd.
+          </p>
         </div>
       </div>
 
