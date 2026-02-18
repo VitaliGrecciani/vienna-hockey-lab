@@ -106,7 +106,9 @@ const CoachCard: React.FC<{ coach: Coach, index: number }> = ({ coach, index }) 
           <img
             src={coach.image}
             alt={coach.name}
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover transition-transform duration-500 
+              ${coach.name.includes('Kirill') ? 'object-top' : 'object-center'}
+            `}
             onError={(e) => {
               (e.target as HTMLImageElement).src = "https://via.placeholder.com/400x500/111111/FFFFFF?text=COACH+PHOTO";
             }}

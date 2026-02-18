@@ -9,6 +9,7 @@ export interface TrainingModule {
   title: string;
   description: string;
   icon: string;
+  link?: string;
 }
 
 export interface RegistrationData {
