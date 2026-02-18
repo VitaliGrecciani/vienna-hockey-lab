@@ -36,7 +36,7 @@ const Legal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               Email: office@viennahockeylab.com<br />
               Web: viennahockeylab.com<br />
               <br />
-              <span className="italic text-gray-500">Note: Currently relocating. Please contact us via email for official correspondence.</span>
+              <span className="italic text-gray-500">Note: Currently relocating our main office. Please contact us via email for official correspondence.</span>
             </p>
             <p>
               <strong>Competent Authority (Aufsichtsbehörde):</strong><br />

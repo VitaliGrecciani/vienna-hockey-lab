@@ -39,14 +39,15 @@ const Footer: React.FC<FooterProps> = ({ onShowLegal }) => {
         <div className="flex flex-col gap-2 items-center md:items-end text-center md:text-right">
           <div className="flex items-center gap-2 text-red-600 font-bold uppercase text-sm">
             <a href="https://www.google.com/maps/search/?api=1&query=EisRing%20Süd%2C%20Windtenstraße%202%2C%201100%20Wien%2C%20Austria" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors relative z-50">
-              EisRing Süd, Vienna
+              Serving Vienna & Suburbs
             </a>
           </div>
-          <a href="mailto:office@viennahockeylab.com" className="text-gray-400 hover:text-white transition-colors font-medium">
+          <span className="text-xs text-gray-400">Training at EisRing Süd (1100 Wien)</span>
+          <a href="mailto:office@viennahockeylab.com" className="text-gray-400 hover:text-white transition-colors font-medium mt-1">
             office@viennahockeylab.com
           </a>
           <p className="text-[10px] text-gray-500 max-w-[200px] leading-tight mt-4 italic">
-            We are currently moving to a new office! For all inquiries, please reach us via email. Training continues at EisRing Süd.
+            Currently relocating our main office - please contact us via email.
           </p>
         </div>
       </div>
