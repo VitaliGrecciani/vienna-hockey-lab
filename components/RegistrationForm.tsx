@@ -141,37 +141,64 @@ const RegistrationForm: React.FC = () => {
     // Production URL for n8n Webhook via localtunnel
     const WEBHOOK_URL = "https://vhl-n8n.loca.lt/webhook/vhl-lead";
 
-    try {
-      const response = await fetch(WEBHOOK_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email: formData.email,
-          phone: formData.phone,
-          age: formData.age,
-          yearsInHockey: formData.yearsInHockey,
-          skillLevel: formData.skillLevel,
-          aiInsight: insight || "N/A",
-          source: "vienna-hockey-lab-landing",
-          timestamp: new Date().toISOString()
-        }),
-      });
+    const submitWithRetry = async (retries = 3, delay = 1000) => {
+      for (let i = 0; i < retries; i++) {
+        try {
+          const response = await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              firstName,
+              lastName,
+              email: formData.email,
+              phone: formData.phone,
+              age: formData.age,
+              yearsInHockey: formData.yearsInHockey,
+              skillLevel: formData.skillLevel,
+              aiInsight: insight || "N/A",
+              source: "vienna-hockey-lab-landing",
+              timestamp: new Date().toISOString()
+            }),
+          });
 
-      if (response.ok) {
+          if (response.ok) return true;
+        } catch (err) {
+          console.warn(`Submission attempt ${i + 1} failed:`, err);
+          if (i < retries - 1) await new Promise(res => setTimeout(res, delay));
+        }
+      }
+      return false;
+    };
+
+    try {
+      const success = await submitWithRetry();
+
+      if (success) {
         setSubmissionStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          age: '',
+          yearsInHockey: '',
+          skillLevel: '',
+          gdprConsent: false,
+          honeypot: ''
+        });
+        setInsight('');
       } else {
-        throw new Error('Server returned ' + response.status);
+        setSubmissionStatus('error');
       }
     } catch (error) {
-      console.error("Submission failed:", error);
-      // For demo purposes, we might want to show success even if the placeholder fails
-      // setSubmissionStatus('success'); 
-      // But adhering to strict engineering:
+      console.error('Submission error:', error);
       setSubmissionStatus('error');
+    } finally {
+      // Small delay before allowing another attempt to prevent double-clicks
+      setTimeout(() => {
+        if (submissionStatus === 'submitting') setSubmissionStatus('idle');
+      }, 2000);
     }
   };
 
