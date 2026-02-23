@@ -95,7 +95,7 @@ const RegistrationForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Spam Check: If honeypot is filled, silently reject (simulating success)
+    // Spam Check
     if (formData.honeypot) {
       console.warn("Spam bot detected via honeypot.");
       setSubmissionStatus('success');
@@ -105,11 +105,8 @@ const RegistrationForm: React.FC = () => {
     // Manual Validation
     const newErrors: Record<string, string> = {};
     if (!formData.name.trim()) newErrors.name = "Full Name is required";
-
-    // Email Validation
     if (!formData.email.trim()) newErrors.email = "Email is required";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Invalid email format";
-
     if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
     if (!formData.age) newErrors.age = "Age is required";
     if (!formData.yearsInHockey) newErrors.yearsInHockey = "Years in Hockey is required";
@@ -135,15 +132,45 @@ const RegistrationForm: React.FC = () => {
     setErrors({});
     setSubmissionStatus('submitting');
 
+    // Split Name for CRM/Automation
+    const nameParts = formData.name.trim().split(' ');
+    const firstName = nameParts[0];
+    const lastName = nameParts.slice(1).join(' ') || '';
+
+    // Placeholder URL for n8n Webhook
+    // Production URL for n8n Webhook via localtunnel
+    const WEBHOOK_URL = "https://vhl-n8n.loca.lt/webhook/vhl-lead";
+
     try {
-      const result = await submitLead(formData);
-      if (result.success) {
+      const response = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email: formData.email,
+          phone: formData.phone,
+          age: formData.age,
+          yearsInHockey: formData.yearsInHockey,
+          skillLevel: formData.skillLevel,
+          aiInsight: insight || "N/A",
+          source: "vienna-hockey-lab-landing",
+          timestamp: new Date().toISOString()
+        }),
+      });
+
+      if (response.ok) {
         setSubmissionStatus('success');
       } else {
-        setSubmissionStatus('error');
+        throw new Error('Server returned ' + response.status);
       }
     } catch (error) {
-      console.error("Submission failed completely:", error);
+      console.error("Submission failed:", error);
+      // For demo purposes, we might want to show success even if the placeholder fails
+      // setSubmissionStatus('success'); 
+      // But adhering to strict engineering:
       setSubmissionStatus('error');
     }
   };
