@@ -68,16 +68,16 @@ const Hero: React.FC = () => {
           <div className="absolute inset-0 rounded-full shadow-[inset_0_2px_4px_rgba(255,255,255,0.3)] z-30 pointer-events-none"></div>
         </motion.div>
 
-        {/* Typography */}
-        <motion.div className="flex flex-col items-center mb-6 w-full">
-          <h1 className="text-[10vw] md:text-[7rem] lg:text-[9rem] font-black font-orbitron tracking-tighter text-white leading-[0.8] uppercase mb-2 drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]">
+        {/* Typography (SEO Optimized H1) */}
+        <motion.h1 className="flex flex-col items-center mb-6 w-full">
+          <span className="text-[10vw] md:text-[7rem] lg:text-[9rem] font-black font-orbitron tracking-tighter text-white leading-[0.8] uppercase mb-2 drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]">
             VIENNA
-          </h1>
-          <div className="flex flex-wrap justify-center gap-4 text-[8vw] md:text-[5rem] lg:text-[7rem] font-black font-orbitron tracking-tighter uppercase leading-[0.8]">
+          </span>
+          <span className="flex flex-wrap justify-center gap-4 text-[8vw] md:text-[5rem] lg:text-[7rem] font-black font-orbitron tracking-tighter uppercase leading-[0.8]">
             <span className="text-lab-red drop-shadow-[0_0_40px_rgba(255,0,0,0.5)]">HOCKEY</span>
             <span className="text-gray-400">LAB</span>
-          </div>
-        </motion.div>
+          </span>
+        </motion.h1>
 
         {/* NEW SLOGAN: ULTIMATE */}
         <motion.p className="text-gray-500 font-mono text-[10px] md:text-lg tracking-[0.5em] uppercase mb-6 md:mb-8 font-black italic">
