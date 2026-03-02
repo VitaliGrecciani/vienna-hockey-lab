@@ -139,7 +139,7 @@ const RegistrationForm: React.FC = () => {
 
     // Placeholder URL for n8n Webhook
     // Production URL for n8n Webhook via localtunnel
-    const WEBHOOK_URL = "https://vhl-n8n.loca.lt/webhook/vhl-lead";
+    const WEBHOOK_URL = "https://n8n.viennahockeylab.com/webhook/vhl-lead";
 
     const submitWithRetry = async (retries = 3, delay = 1000) => {
       for (let i = 0; i < retries; i++) {
