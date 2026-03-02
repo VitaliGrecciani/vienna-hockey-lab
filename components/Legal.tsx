@@ -49,9 +49,9 @@ const Legal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         </section>
 
         <section className="pb-24">
-          <h1 className="text-4xl font-black text-white mb-8 italic uppercase tracking-tighter">
+          <h2 className="text-4xl font-black text-white mb-8 italic uppercase tracking-tighter">
             Privacy <span className="text-red-600">Policy</span> (DSGVO)
-          </h1>
+          </h2>
           <div className="space-y-6 text-sm leading-relaxed">
             <div>
               <h3 className="text-white font-bold mb-2 uppercase">1. Data Collection and Purpose</h3>

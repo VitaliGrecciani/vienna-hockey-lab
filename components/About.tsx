@@ -146,6 +146,7 @@ const VideoPlayer = () => {
           onClick={toggleMute}
           className="absolute bottom-6 right-6 z-40 bg-black/60 backdrop-blur-md p-3 rounded-full border border-white/10 text-white hover:bg-black/80 transition-colors"
           title={isMuted ? "Unmute" : "Mute"}
+          aria-label={isMuted ? "Unmute video" : "Mute video"}
         >
           {isMuted ? (
             // Muted Icon
@@ -181,6 +182,7 @@ const VideoPlayer = () => {
           loop
           muted={isMuted} // Controlled by React state
           playsInline
+          aria-label="Vienna Hockey Lab training demonstration"
           className={`w-full h-full object-cover pointer-events-none ${!videoLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-500 rounded-[inherit]`}
         >
           <source src="/video-hockey-lab.mp4" type="video/mp4" />

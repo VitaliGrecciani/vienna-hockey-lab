@@ -238,32 +238,32 @@ const RegistrationForm: React.FC = () => {
 
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Full Name</label>
-                <input type="text" name="name" value={formData.name} onChange={handleChange} className={`${inputClasses} ${errors.name ? 'border-red-600' : ''}`} placeholder="ALEX OVECHKIN" />
+                <label htmlFor="name" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Full Name</label>
+                <input id="name" type="text" name="name" value={formData.name} onChange={handleChange} className={`${inputClasses} ${errors.name ? 'border-red-600' : ''}`} placeholder="ALEX OVECHKIN" />
                 {errors.name && <p className="text-red-600 text-[10px] mt-1 uppercase italic font-bold">{errors.name}</p>}
               </div>
               <div>
-                <label className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Email Address</label>
-                <input type="email" name="email" value={formData.email} onChange={handleChange} className={`${inputClasses} ${errors.email ? 'border-red-600' : ''}`} placeholder="alex8@caps.com" />
+                <label htmlFor="email" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Email Address</label>
+                <input id="email" type="email" name="email" value={formData.email} onChange={handleChange} className={`${inputClasses} ${errors.email ? 'border-red-600' : ''}`} placeholder="alex8@caps.com" />
                 {errors.email && <p className="text-red-600 text-[10px] mt-1 uppercase italic font-bold">{errors.email}</p>}
               </div>
             </div>
 
             <div>
-              <label className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Phone (WhatsApp)</label>
-              <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className={`${inputClasses} ${errors.phone ? 'border-red-600' : ''}`} placeholder="+43 660 123 4567" />
+              <label htmlFor="phone" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Phone (WhatsApp)</label>
+              <input id="phone" type="tel" name="phone" value={formData.phone} onChange={handleChange} className={`${inputClasses} ${errors.phone ? 'border-red-600' : ''}`} placeholder="+43 660 123 4567" />
               {errors.phone && <p className="text-red-600 text-[10px] mt-1 uppercase italic font-bold">{errors.phone}</p>}
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Age</label>
-                <input type="text" inputMode="numeric" name="age" value={formData.age} onChange={handleChange} className={`w-full bg-white/5 border ${errors.age ? 'border-red-600' : 'border-white/10'} rounded-lg p-4 text-white focus:border-red-600 focus:bg-white/10 focus:outline-none transition-all`} placeholder="12" />
+                <label htmlFor="age" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Age</label>
+                <input id="age" type="text" inputMode="numeric" name="age" value={formData.age} onChange={handleChange} className={`w-full bg-white/5 border ${errors.age ? 'border-red-600' : 'border-white/10'} rounded-lg p-4 text-white focus:border-red-600 focus:bg-white/10 focus:outline-none transition-all`} placeholder="12" />
                 {errors.age && <p className="text-red-600 text-[10px] mt-1 uppercase italic font-bold">{errors.age}</p>}
               </div>
               <div>
-                <label className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Years Playing</label>
-                <input type="text" inputMode="numeric" name="yearsInHockey" value={formData.yearsInHockey} onChange={handleChange} className={`w-full bg-white/5 border ${errors.yearsInHockey ? 'border-red-600' : 'border-white/10'} rounded-lg p-4 text-white focus:border-red-600 focus:bg-white/10 focus:outline-none transition-all`} placeholder="5" />
+                <label htmlFor="yearsInHockey" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Years Playing</label>
+                <input id="yearsInHockey" type="text" inputMode="numeric" name="yearsInHockey" value={formData.yearsInHockey} onChange={handleChange} className={`w-full bg-white/5 border ${errors.yearsInHockey ? 'border-red-600' : 'border-white/10'} rounded-lg p-4 text-white focus:border-red-600 focus:bg-white/10 focus:outline-none transition-all`} placeholder="5" />
                 {errors.yearsInHockey && <p className="text-red-600 text-[10px] mt-1 uppercase italic font-bold">{errors.yearsInHockey}</p>}
               </div>
             </div>
@@ -280,8 +280,8 @@ const RegistrationForm: React.FC = () => {
             </AnimatePresence>
 
             <div>
-              <label className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Current Skill Level</label>
-              <select name="skillLevel" value={formData.skillLevel} onChange={handleChange} className={`w-full bg-white/5 border ${errors.skillLevel ? 'border-red-600' : 'border-white/10'} rounded-lg p-4 text-white focus:border-red-600 focus:bg-white/10 focus:outline-none transition-all cursor-pointer appearance-none`}>
+              <label htmlFor="skillLevel" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Current Skill Level</label>
+              <select id="skillLevel" name="skillLevel" value={formData.skillLevel} onChange={handleChange} className={`w-full bg-white/5 border ${errors.skillLevel ? 'border-red-600' : 'border-white/10'} rounded-lg p-4 text-white focus:border-red-600 focus:bg-white/10 focus:outline-none transition-all cursor-pointer appearance-none`}>
                 <option value="" className="bg-black text-white">SELECT LEVEL...</option>
                 <option value="Beginner" className="bg-black text-white">Beginner (0-2 years)</option>
                 <option value="Amateur" className="bg-black text-white">Amateur (League Play)</option>
@@ -292,8 +292,8 @@ const RegistrationForm: React.FC = () => {
 
             <div className="flex flex-col gap-1 mt-4">
               <div className="flex items-start gap-3">
-                <input type="checkbox" name="gdprConsent" checked={formData.gdprConsent} onChange={handleChange} className="mt-1 accent-red-600 w-4 h-4 cursor-pointer" />
-                <label className="text-gray-500 text-[10px] uppercase leading-tight font-medium">
+                <input id="gdprConsent" type="checkbox" name="gdprConsent" checked={formData.gdprConsent} onChange={handleChange} className="mt-1 accent-red-600 w-4 h-4 cursor-pointer" />
+                <label htmlFor="gdprConsent" className="text-gray-500 text-[10px] uppercase leading-tight font-medium cursor-pointer">
                   I agree to the <a href="#" className="text-red-600 hover:underline">Privacy Policy</a> and data processing.
                 </label>
               </div>
