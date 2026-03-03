@@ -7,7 +7,7 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ onShowLegal }) => {
   return (
-    <footer className="w-full bg-white/5 backdrop-blur-xl pt-16 pb-8 px-6 relative z-10">
+    <footer className="w-full bg-white/5 backdrop-blur-xl pt-16 pb-8 px-6 relative z-10 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-10">
 
         {/* Лого и описание */}
