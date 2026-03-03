@@ -1,4 +1,5 @@
 import React from 'react';
+import GalaxyLink from './GalaxyLink';
 
 interface FooterProps {
   onShowLegal: () => void;
@@ -53,11 +54,17 @@ const Footer: React.FC<FooterProps> = ({ onShowLegal }) => {
       </div>
 
       {/* Нижняя плашка */}
-      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-gray-950 flex flex-col items-center gap-4 text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold text-center">
-        <p>
-          © 2026 Vienna Hockey Lab <span className="mx-2 text-gray-800">|</span> ZVR: 1999424312 <span className="mx-2 text-gray-800">|</span>
-          <button onClick={onShowLegal} className="hover:text-white transition-colors ml-2">Legal Notice & Privacy</button>
+      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-gray-950 flex flex-col md:flex-row items-center justify-between gap-6 text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold text-center">
+        <div className="flex-1 hidden md:block" /> {/* Spacer */}
+        <p className="flex items-center justify-center flex-wrap gap-2">
+          © 2026 Vienna Hockey Lab <span className="mx-2 text-gray-800 hidden md:inline">|</span>
+          <span className="w-full md:w-auto">ZVR: 1999424312</span>
+          <span className="mx-2 text-gray-800 hidden md:inline">|</span>
+          <button onClick={onShowLegal} className="hover:text-white transition-colors ml-0 md:ml-2">Legal Notice & Privacy</button>
         </p>
+        <div className="flex-1 flex justify-center md:justify-end items-center relative z-20">
+          <GalaxyLink />
+        </div>
       </div>
     </footer>
   );
