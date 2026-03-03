@@ -54,7 +54,7 @@ const Footer: React.FC<FooterProps> = ({ onShowLegal }) => {
       </div>
 
       {/* Нижняя плашка */}
-      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-gray-950 flex flex-col md:flex-row items-center justify-between gap-6 text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold text-center">
+      <div className="max-w-7xl mx-auto mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-6 text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold text-center">
         <div className="flex-1 hidden md:block" /> {/* Spacer */}
         <p className="flex items-center justify-center flex-wrap gap-2">
           © 2026 Vienna Hockey Lab <span className="mx-2 text-gray-800 hidden md:inline">|</span>
