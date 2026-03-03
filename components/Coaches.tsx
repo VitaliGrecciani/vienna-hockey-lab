@@ -130,7 +130,7 @@ const Coaches: React.FC = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          The <span className="text-red-600">Architects</span>
+          Our <span className="text-red-600">Team</span>
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

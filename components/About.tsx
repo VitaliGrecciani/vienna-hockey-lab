@@ -15,7 +15,7 @@ const About: React.FC = () => {
             Precision. <span className="text-lab-red">Power.</span> Intelligence.
           </h2>
           <p className="text-gray-300 text-lg leading-relaxed mb-6 font-medium">
-            Vienna Hockey Lab stands as the only specialized skills training facility in Vienna. We operate as a high-performance center dedicated to the total deconstruction and reconstruction of your game. Our staff provides elite coaching for kids, teens, and adults with a surgical focus on skating mechanics, stickhandling precision, and the intricate physics of shooting. We bridge the gap between effort and results by developing the crucial element of Hockey IQ in every athlete.
+            Vienna Hockey Lab stands as the only specialized skills training facility in Vienna. We operate as a high-performance center dedicated to the total deconstruction and reconstruction of your game. Our staff provides elite coaching for kids, teens, and adults with a surgical focus on <span className="text-lab-red font-bold uppercase">skating</span> mechanics, <span className="text-lab-red font-bold uppercase">stickhandling</span> precision, and the intricate physics of <span className="text-lab-red font-bold uppercase">shooting</span>. We bridge the gap between effort and results by developing the crucial element of Hockey IQ in every athlete.
           </p>
           <div className="h-1 w-24 bg-lab-red shadow-glow" />
         </motion.div>
