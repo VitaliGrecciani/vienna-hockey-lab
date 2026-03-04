@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -6,89 +6,143 @@ const GalaxyLink: React.FC = () => {
     const [isHovered, setIsHovered] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
+    // Fractal-like distribution: clusters of stars instead of a single core
+    const starCount = 80;
+    const stars = useMemo(() => Array.from({ length: starCount }).map((_, i) => {
+        // Create fractal-like clustering
+        const clusterSelection = Math.random();
+        let baseX = 0, baseY = 0, spread = 60;
+
+        if (clusterSelection > 0.7) { // Cluster A
+            baseX = 15; baseY = -10; spread = 30;
+        } else if (clusterSelection > 0.4) { // Cluster B
+            baseX = -20; baseY = 15; spread = 40;
+        }
+
+        return {
+            id: i,
+            size: Math.random() * 2 + 0.2,
+            x: baseX + (Math.random() - 0.5) * spread,
+            y: baseY + (Math.random() - 0.5) * spread,
+            driftX: (Math.random() - 0.5) * 20,
+            driftY: (Math.random() - 0.5) * 20,
+            scatterX: (Math.random() - 0.5) * 600,
+            scatterY: (Math.random() - 0.5) * 600,
+            duration: 4 + Math.random() * 6,
+            delay: Math.random() * 4,
+        };
+    }), []);
+
+    // Fractal gas clouds (irregular, nested-like layers)
+    const nebulaLayers = useMemo(() => Array.from({ length: 6 }).map((_, i) => ({
+        id: i,
+        color: i % 3 === 0 ? 'rgba(220,38,38,0.25)' : (i % 3 === 1 ? 'rgba(34,211,238,0.2)' : 'rgba(147,51,234,0.15)'),
+        borderRadius: `${30 + Math.random() * 60}% ${30 + Math.random() * 60}% ${30 + Math.random() * 60}% ${30 + Math.random() * 60}% / ${30 + Math.random() * 60}% ${30 + Math.random() * 60}% ${30 + Math.random() * 60}% ${30 + Math.random() * 60}%`,
+        scale: 0.8 + Math.random() * 1.5,
+        x: (Math.random() - 0.5) * 30,
+        y: (Math.random() - 0.5) * 30,
+        rotate: Math.random() * 360,
+        speed: 20 + Math.random() * 30
+    })), []);
+
     return (
         <>
             <motion.button
-                className="relative w-10 h-10 flex items-center justify-center cursor-pointer group outline-none shrink-0"
+                className="relative w-16 h-16 flex items-center justify-center cursor-pointer group outline-none shrink-0"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 onClick={() => setShowModal(true)}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label="Developer Info"
-                title="Who made this?"
+                whileTap={{ scale: 0.9 }}
+                aria-label="Who made this?"
             >
-                {/* Core glow / Nebulous base */}
-                <motion.div
-                    className="absolute inset-[-20%] bg-red-700/20 blur-xl rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transition-opacity duration-500 opacity-60 mix-blend-screen"
-                    animate={{
-                        rotate: isHovered ? 180 : 0,
-                        scale: isHovered ? 1.5 : 1,
-                        opacity: isHovered ? 0.8 : 0.5,
-                        borderRadius: isHovered ? ["40% 60% 70% 30% / 40% 50% 60% 50%", "60% 40% 30% 70% / 50% 60% 40% 50%", "40% 60% 70% 30% / 40% 50% 60% 50%"] : "40% 60% 70% 30% / 40% 50% 60% 50%"
-                    }}
-                    transition={{ duration: isHovered ? 4 : 20, repeat: Infinity, ease: "linear" }}
-                />
+                {/* Prevent clipping on mobile - absolute container that is larger than the button */}
+                <div className="absolute inset-[-400%] pointer-events-none flex items-center justify-center overflow-visible z-[-1]">
 
-                {/* Swirling Dust Cloud 1 */}
-                <motion.div
-                    className="absolute inset-[-50%] opacity-50 mix-blend-screen rounded-[60%_40%_50%_50%/50%_50%_70%_30%]"
-                    style={{
-                        background: 'radial-gradient(circle at 40% 40%, rgba(220,38,38,0.5) 0%, transparent 50%), radial-gradient(circle at 70% 60%, rgba(147,51,234,0.4) 0%, transparent 60%)',
-                        filter: 'blur(4px)'
-                    }}
-                    animate={{
-                        rotate: isHovered ? 360 : 180,
-                        scale: isHovered ? 1.8 : 1.1
-                    }}
-                    transition={{ duration: isHovered ? 5 : 25, repeat: Infinity, ease: "linear" }}
-                />
+                    {/* Background Ambient Glow */}
+                    <div className="absolute w-[200px] h-[200px] bg-blue-900/5 blur-[80px] rounded-full" />
 
-                {/* Swirling Dust Cloud 2 */}
-                <motion.div
-                    className="absolute inset-[-80%] opacity-40 mix-blend-screen rounded-[30%_70%_70%_30%/30%_30%_70%_70%]"
-                    style={{
-                        background: 'radial-gradient(circle at 60% 30%, rgba(255,100,100,0.3) 0%, transparent 60%), radial-gradient(circle at 30% 70%, rgba(100,50,250,0.2) 0%, transparent 50%)',
-                        filter: 'blur(6px)'
-                    }}
-                    animate={{
-                        rotate: isHovered ? -360 : -180,
-                        scale: isHovered ? 2.2 : 1.2,
-                        opacity: isHovered ? 0.6 : 0.3
-                    }}
-                    transition={{ duration: isHovered ? 6 : 30, repeat: Infinity, ease: "linear" }}
-                />
+                    {/* Fractal Nebula Clouds */}
+                    {nebulaLayers.map((layer) => (
+                        <motion.div
+                            key={`layer-${layer.id}`}
+                            className="absolute w-40 h-40 mix-blend-screen overflow-visible"
+                            style={{
+                                background: `radial-gradient(circle at center, ${layer.color} 0%, transparent 75%)`,
+                                borderRadius: layer.borderRadius,
+                                filter: 'blur(12px)',
+                                left: `calc(50% + ${layer.x}px)`,
+                                top: `calc(50% + ${layer.y}px)`,
+                            }}
+                            animate={{
+                                rotate: isHovered ? layer.rotate + 270 : layer.rotate,
+                                scale: isHovered ? [layer.scale, layer.scale * 4, layer.scale * 8] : [layer.scale, layer.scale * 1.1, layer.scale],
+                                opacity: isHovered ? [0.6, 0.4, 0] : 0.45,
+                                x: isHovered ? (Math.random() - 0.5) * 200 : 0,
+                                y: isHovered ? (Math.random() - 0.5) * 200 : 0,
+                            }}
+                            transition={{
+                                rotate: { duration: layer.speed, repeat: Infinity, ease: "linear" },
+                                scale: { duration: isHovered ? 4 : 8, repeat: isHovered ? 0 : Infinity, ease: "easeInOut" },
+                                opacity: { duration: isHovered ? 4 : 3 },
+                                x: { duration: 4, ease: "easeOut" },
+                                y: { duration: 4, ease: "easeOut" }
+                            }}
+                        />
+                    ))}
 
-                {/* Scattered Star Particles (visible mainly on hover) */}
-                {[...Array(5)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        className="absolute w-0.5 h-0.5 bg-white rounded-full shadow-[0_0_4px_1px_rgba(255,255,255,0.8)]"
-                        initial={{ x: 0, y: 0, opacity: 0 }}
-                        animate={{
-                            x: isHovered ? (Math.random() - 0.5) * 60 : (Math.random() - 0.5) * 10,
-                            y: isHovered ? (Math.random() - 0.5) * 60 : (Math.random() - 0.5) * 10,
-                            opacity: isHovered ? [0, 1, 0] : 0,
-                            scale: isHovered ? [0, 1.5, 0] : 0
-                        }}
-                        transition={{
-                            duration: 2 + Math.random() * 2,
-                            repeat: Infinity,
-                            delay: Math.random() * 2,
-                            ease: "easeInOut"
-                        }}
-                    />
-                ))}
+                    {/* Wispy Scattering Filaments */}
+                    {[...Array(12)].map((_, i) => (
+                        <motion.div
+                            key={`filament-${i}`}
+                            className="absolute w-24 h-1 mix-blend-screen blur-[15px] rounded-full"
+                            style={{
+                                background: i % 2 === 0 ? 'rgba(239, 68, 68, 0.25)' : 'rgba(6, 182, 212, 0.2)',
+                                top: '50%', left: '50%',
+                                transformOrigin: '0% 0%',
+                                rotate: `${i * 30}deg`
+                            }}
+                            animate={{
+                                rotate: isHovered ? i * 30 + (Math.random() - 0.5) * 180 : i * 30,
+                                scaleX: isHovered ? [1, 8, 12] : [1, 1.4, 1],
+                                opacity: isHovered ? [0.8, 0.4, 0] : 0.35,
+                                x: isHovered ? (Math.random() - 0.5) * 400 : 0,
+                                y: isHovered ? (Math.random() - 0.5) * 400 : 0,
+                            }}
+                            transition={{
+                                duration: isHovered ? 4 : 12 + i * 2,
+                                repeat: isHovered ? 0 : Infinity,
+                                ease: "easeOut"
+                            }}
+                        />
+                    ))}
 
-                {/* Center Core */}
-                <motion.div
-                    className="absolute w-1.5 h-1.5 bg-white/90 rounded-full shadow-[0_0_10px_4px_rgba(255,200,200,0.8)]"
-                    animate={{
-                        scale: isHovered ? [1, 0.5, 1.5, 1] : [1, 1.2, 1],
-                        opacity: isHovered ? [1, 0.7, 1] : 1
-                    }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                />
+                    {/* Stars following fractal distribution */}
+                    {stars.map((star) => (
+                        <motion.div
+                            key={star.id}
+                            className="absolute bg-white rounded-full mix-blend-screen"
+                            style={{
+                                width: star.size,
+                                height: star.size,
+                                boxShadow: `0 0 ${star.size * 3}px white`,
+                                left: `calc(50% + ${star.x}px)`,
+                                top: `calc(50% + ${star.y}px)`,
+                            }}
+                            animate={{
+                                x: isHovered ? star.scatterX : [0, star.driftX, 0],
+                                y: isHovered ? star.scatterY : [0, star.driftY, 0],
+                                opacity: isHovered ? 0 : [0.3, 1, 0.3],
+                                scale: isHovered ? 0 : [1, 1.4, 1],
+                            }}
+                            transition={{
+                                x: { duration: isHovered ? 4 + Math.random() * 2 : star.duration, repeat: isHovered ? 0 : Infinity, ease: "easeOut" },
+                                y: { duration: isHovered ? 4 + Math.random() * 2 : star.duration, repeat: isHovered ? 0 : Infinity, ease: "easeOut" },
+                                opacity: { duration: isHovered ? 4 : star.duration, repeat: Infinity, delay: star.delay },
+                                scale: { duration: isHovered ? 4 : star.duration, repeat: Infinity, delay: star.delay }
+                            }}
+                        />
+                    ))}
+                </div>
             </motion.button>
 
             {/* Placeholder Modal */}

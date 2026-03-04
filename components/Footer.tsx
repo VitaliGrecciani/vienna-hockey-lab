@@ -62,7 +62,7 @@ const Footer: React.FC<FooterProps> = ({ onShowLegal }) => {
           <span className="mx-2 text-gray-800 hidden md:inline">|</span>
           <button onClick={onShowLegal} className="hover:text-white transition-colors ml-0 md:ml-2">Legal Notice & Privacy</button>
         </p>
-        <div className="flex-1 flex justify-center md:justify-end items-center relative z-20">
+        <div className="flex-1 flex justify-center md:justify-end items-center relative z-20 md:pr-16">
           <GalaxyLink />
         </div>
       </div>
