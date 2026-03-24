@@ -3,7 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { RegistrationData } from '../types';
 import { submitLead } from '../services/leadService';
 
-const RegistrationForm: React.FC = () => {
+interface Props {
+  lang?: 'en' | 'de';
+}
+
+const RegistrationForm: React.FC<Props> = ({ lang = 'en' }) => {
+  const isDe = lang === 'de';
   const [formData, setFormData] = useState<RegistrationData & { gdprConsent: boolean, honeypot: string }>({
     name: '',
     email: '',
@@ -104,14 +109,14 @@ const RegistrationForm: React.FC = () => {
 
     // Manual Validation
     const newErrors: Record<string, string> = {};
-    if (!formData.name.trim()) newErrors.name = "Full Name is required";
-    if (!formData.email.trim()) newErrors.email = "Email is required";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Invalid email format";
-    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
-    if (!formData.age) newErrors.age = "Age is required";
-    if (!formData.yearsInHockey) newErrors.yearsInHockey = "Years in Hockey is required";
-    if (!formData.skillLevel) newErrors.skillLevel = "Please select a skill level";
-    if (!formData.gdprConsent) newErrors.gdprConsent = "You must agree to the Privacy Policy";
+    if (!formData.name.trim()) newErrors.name = isDe ? "Name ist erforderlich" : "Full Name is required";
+    if (!formData.email.trim()) newErrors.email = isDe ? "E-Mail ist erforderlich" : "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = isDe ? "Ungültiges E-Mail-Format" : "Invalid email format";
+    if (!formData.phone.trim()) newErrors.phone = isDe ? "Telefonnummer ist erforderlich" : "Phone number is required";
+    if (!formData.age) newErrors.age = isDe ? "Alter ist erforderlich" : "Age is required";
+    if (!formData.yearsInHockey) newErrors.yearsInHockey = isDe ? "Erfahrung ist erforderlich" : "Years in Hockey is required";
+    if (!formData.skillLevel) newErrors.skillLevel = isDe ? "Bitte wähle ein Niveau" : "Please select a skill level";
+    if (!formData.gdprConsent) newErrors.gdprConsent = isDe ? "Du musst der Datenschutzerklärung zustimmen" : "You must agree to the Privacy Policy";
 
     // Logic Validation
     if (formData.phone && formData.phone.replace(/\D/g, '').length < 7) {
@@ -209,19 +214,25 @@ const RegistrationForm: React.FC = () => {
       <div className="max-w-3xl mx-auto relative z-10">
 
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-black mb-4 text-white uppercase italic tracking-tighter">Join The <span className="text-red-600">Lab</span></h2>
-          <p className="text-gray-500 font-mono text-xs tracking-widest uppercase font-bold">Start Your Transformation</p>
+          <h2 className="text-4xl md:text-5xl font-black mb-4 text-white uppercase italic tracking-tighter">
+            {isDe ? "ZUR" : "Join The"} <span className="text-red-600">{isDe ? "ANMELDUNG" : "Lab"}</span>
+          </h2>
+          <p className="text-gray-500 font-mono text-xs tracking-widest uppercase font-bold">
+            {isDe ? "JETZT BUCHEN" : "Start Your Transformation"}
+          </p>
         </div>
 
         {submissionStatus === 'success' ? (
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="p-12 bg-white/5 backdrop-blur-xl border border-white/10 text-center rounded-2xl shadow-2xl">
             <div className="text-6xl mb-6">✅</div>
-            <h3 className="text-3xl font-black text-white mb-4 uppercase italic">Application Sent</h3>
-            <p className="text-gray-400 mb-8 text-lg font-medium">Our staff will review your profile and contact you shortly via WhatsApp.</p>
+            <h3 className="text-3xl font-black text-white mb-4 uppercase italic">{isDe ? "Bewerbung gesendet" : "Application Sent"}</h3>
+            <p className="text-gray-400 mb-8 text-lg font-medium">{isDe ? "Unser Team wird dein Profil prüfen und sich in Kürze über WhatsApp melden." : "Our staff will review your profile and contact you shortly via WhatsApp."}</p>
             <button onClick={() => {
               setSubmissionStatus('idle');
               setFormData({ name: '', phone: '', age: '', yearsInHockey: '', skillLevel: '', gdprConsent: false, honeypot: '' });
-            }} className="text-red-600 hover:text-white underline text-sm uppercase tracking-widest transition-colors font-bold">Submit Another Player</button>
+            }} className="text-red-600 hover:text-white underline text-sm uppercase tracking-widest transition-colors font-bold">
+              {isDe ? "Weiteren Spieler eintragen" : "Submit Another Player"}
+            </button>
           </motion.div>
         ) : (
           <form onSubmit={handleSubmit} noValidate className="space-y-6 bg-white/5 backdrop-blur-xl p-8 md:p-12 border border-white/10 rounded-2xl shadow-2xl relative">
@@ -238,31 +249,31 @@ const RegistrationForm: React.FC = () => {
 
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="name" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Full Name</label>
+                <label htmlFor="name" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">{isDe ? "Vor- und Nachname" : "Full Name"}</label>
                 <input id="name" type="text" name="name" value={formData.name} onChange={handleChange} className={`${inputClasses} ${errors.name ? 'border-red-600' : ''}`} placeholder="ALEX OVECHKIN" />
                 {errors.name && <p className="text-red-600 text-[10px] mt-1 uppercase italic font-bold">{errors.name}</p>}
               </div>
               <div>
-                <label htmlFor="email" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Email Address</label>
+                <label htmlFor="email" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">{isDe ? "E-Mail Adresse" : "Email Address"}</label>
                 <input id="email" type="email" name="email" value={formData.email} onChange={handleChange} className={`${inputClasses} ${errors.email ? 'border-red-600' : ''}`} placeholder="alex8@caps.com" />
                 {errors.email && <p className="text-red-600 text-[10px] mt-1 uppercase italic font-bold">{errors.email}</p>}
               </div>
             </div>
 
             <div>
-              <label htmlFor="phone" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Phone (WhatsApp)</label>
+              <label htmlFor="phone" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">{isDe ? "Telefonnummer (WhatsApp)" : "Phone (WhatsApp)"}</label>
               <input id="phone" type="tel" name="phone" value={formData.phone} onChange={handleChange} className={`${inputClasses} ${errors.phone ? 'border-red-600' : ''}`} placeholder="+43 660 123 4567" />
               {errors.phone && <p className="text-red-600 text-[10px] mt-1 uppercase italic font-bold">{errors.phone}</p>}
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="age" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Age</label>
+                <label htmlFor="age" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">{isDe ? "Alter" : "Age"}</label>
                 <input id="age" type="text" inputMode="numeric" name="age" value={formData.age} onChange={handleChange} className={`w-full bg-white/5 border ${errors.age ? 'border-red-600' : 'border-white/10'} rounded-lg p-4 text-white focus:border-red-600 focus:bg-white/10 focus:outline-none transition-all`} placeholder="12" />
                 {errors.age && <p className="text-red-600 text-[10px] mt-1 uppercase italic font-bold">{errors.age}</p>}
               </div>
               <div>
-                <label htmlFor="yearsInHockey" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Years Playing</label>
+                <label htmlFor="yearsInHockey" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">{isDe ? "Jahre Eishockey" : "Years Playing"}</label>
                 <input id="yearsInHockey" type="text" inputMode="numeric" name="yearsInHockey" value={formData.yearsInHockey} onChange={handleChange} className={`w-full bg-white/5 border ${errors.yearsInHockey ? 'border-red-600' : 'border-white/10'} rounded-lg p-4 text-white focus:border-red-600 focus:bg-white/10 focus:outline-none transition-all`} placeholder="5" />
                 {errors.yearsInHockey && <p className="text-red-600 text-[10px] mt-1 uppercase italic font-bold">{errors.yearsInHockey}</p>}
               </div>
@@ -280,12 +291,12 @@ const RegistrationForm: React.FC = () => {
             </AnimatePresence>
 
             <div>
-              <label htmlFor="skillLevel" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">Current Skill Level</label>
+              <label htmlFor="skillLevel" className="block text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-2 font-bold">{isDe ? "Niveau Auswählen" : "Current Skill Level"}</label>
               <select id="skillLevel" name="skillLevel" value={formData.skillLevel} onChange={handleChange} className={`w-full bg-white/5 border ${errors.skillLevel ? 'border-red-600' : 'border-white/10'} rounded-lg p-4 text-white focus:border-red-600 focus:bg-white/10 focus:outline-none transition-all cursor-pointer appearance-none`}>
-                <option value="" className="bg-black text-white">SELECT LEVEL...</option>
-                <option value="Beginner" className="bg-black text-white">Beginner (0-2 years)</option>
-                <option value="Amateur" className="bg-black text-white">Amateur (League Play)</option>
-                <option value="Pro" className="bg-black text-white">Pro / Elite Prospect</option>
+                <option value="" className="bg-black text-white">{isDe ? "NIVEAU AUSWÄHLEN..." : "SELECT LEVEL..."}</option>
+                <option value="Beginner" className="bg-black text-white">{isDe ? "Anfänger (0-2 Jahre)" : "Beginner (0-2 years)"}</option>
+                <option value="Amateur" className="bg-black text-white">{isDe ? "Amateur / Hobbyliga" : "Amateur (League Play)"}</option>
+                <option value="Pro" className="bg-black text-white">{isDe ? "Profi / Elite Nachwuchs" : "Pro / Elite Prospect"}</option>
               </select>
               {errors.skillLevel && <p className="text-red-600 text-[10px] mt-1 uppercase italic font-bold">{errors.skillLevel}</p>}
             </div>
@@ -294,7 +305,9 @@ const RegistrationForm: React.FC = () => {
               <div className="flex items-start gap-3">
                 <input id="gdprConsent" type="checkbox" name="gdprConsent" checked={formData.gdprConsent} onChange={handleChange} className="mt-1 accent-red-600 w-4 h-4 cursor-pointer" />
                 <label htmlFor="gdprConsent" className="text-gray-500 text-[10px] uppercase leading-tight font-medium cursor-pointer">
-                  I agree to the <a href="#" className="text-red-600 hover:underline">Privacy Policy</a> and data processing.
+                  {isDe ? "Ich stimme der " : "I agree to the "}
+                  <a href="#" className="text-red-600 hover:underline">{isDe ? "Datenschutzerklärung" : "Privacy Policy"}</a>
+                  {isDe ? " und Datenverarbeitung zu." : " and data processing."}
                 </label>
               </div>
               {errors.gdprConsent && <p className="text-red-600 text-[10px] uppercase italic font-bold pl-7">{errors.gdprConsent}</p>}
@@ -306,7 +319,7 @@ const RegistrationForm: React.FC = () => {
               style={{ clipPath: "polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)" }}
               className={`w-full py-5 ${submissionStatus === 'submitting' ? 'bg-gray-800' : 'bg-red-600 hover:bg-white'} text-black font-black font-orbitron text-xl uppercase tracking-widest transition-all duration-500 shadow-xl`}
             >
-              {submissionStatus === 'submitting' ? 'TRANSMITTING...' : 'BOOK A SESSION'}
+              {submissionStatus === 'submitting' ? (isDe ? 'WIRD GESENDET...' : 'TRANSMITTING...') : (isDe ? 'JETZT BUCHEN' : 'BOOK A SESSION')}
             </button>
 
             {submissionStatus === 'error' && (

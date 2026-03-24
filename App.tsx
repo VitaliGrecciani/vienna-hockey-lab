@@ -10,6 +10,8 @@ import RegistrationForm from './components/RegistrationForm';
 import Footer from './components/Footer';
 import Legal from './components/Legal';
 import SkillsPage from './components/SkillsPage';
+import EishockeyTrainingWien from './components/EishockeyTrainingWien';
+import { IndividualTraining, HockeyIQ, SkatingMechanics } from './components/NichePages';
 import { AnimatePresence } from 'framer-motion';
 
 // Main Landing Page Component
@@ -50,9 +52,18 @@ const AppContent: React.FC = () => {
       <FractalBackground />
 
       <div className="relative z-0">
-        <Routes location={location} key={location.pathname}>
+        <Routes>
           <Route path="/" element={<Home onShowLegal={() => setShowLegal(true)} />} />
           <Route path="/skills" element={<SkillsPage />} />
+          
+          {/* Niche SEO Pages */}
+          <Route path="/individual-training" element={<IndividualTraining onShowLegal={() => setShowLegal(true)} />} />
+          <Route path="/hockey-iq" element={<HockeyIQ onShowLegal={() => setShowLegal(true)} />} />
+          <Route path="/skating-mechanics" element={<SkatingMechanics onShowLegal={() => setShowLegal(true)} />} />
+
+          {/* German SEO Landing Page */}
+          <Route path="/de" element={<EishockeyTrainingWien onShowLegal={() => setShowLegal(true)} />} />
+          <Route path="/DE" element={<EishockeyTrainingWien onShowLegal={() => setShowLegal(true)} />} />
         </Routes>
       </div>
 

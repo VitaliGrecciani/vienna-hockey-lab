@@ -57,12 +57,7 @@ const SkillsPage: React.FC = () => {
     ];
 
     return (
-        <section className="min-h-screen pt-24 pb-12 px-4 relative overflow-hidden bg-black text-white">
-
-            {/* Background Fractals - Brightened */}
-            <div className="absolute inset-0 z-0">
-                <FractalBackground />
-            </div>
+        <section className="min-h-screen pt-24 pb-12 px-4 relative overflow-hidden bg-transparent text-white">
 
             {/* SEO Metadata (Hidden) */}
             <div className="hidden">

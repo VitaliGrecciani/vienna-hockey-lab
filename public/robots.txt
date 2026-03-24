@@ -1,13 +1,11 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /_next/
-Disallow: /private/
 
-# Специально для Yandex (учитывая твой фокус на русскоязычный сегмент)
+# Yandex
 User-agent: Yandex
 Allow: /
 Disallow: /api/
 
-# Карта сайта для быстрой индексации всех регионов и языков
+# Sitemap
 Sitemap: https://viennahockeylab.com/sitemap.xml

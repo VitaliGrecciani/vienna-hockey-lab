@@ -1,9 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Homepage (EN) -->
   <url>
-    <loc>https://viennahockeylab.com/</loc>
-    <lastmod>2026-02-18</lastmod>
+    <loc>https://www.viennahockeylab.com/</loc>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.viennahockeylab.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.viennahockeylab.com/de" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.viennahockeylab.com/" />
+  </url>
+  <!-- German SEO Landing Page -->
+  <url>
+    <loc>https://www.viennahockeylab.com/de</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.viennahockeylab.com/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.viennahockeylab.com/de" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.viennahockeylab.com/" />
+  </url>
+  <!-- Skills Overview -->
+  <url>
+    <loc>https://www.viennahockeylab.com/skills</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Individual Training -->
+  <url>
+    <loc>https://www.viennahockeylab.com/individual-training</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Hockey IQ -->
+  <url>
+    <loc>https://www.viennahockeylab.com/hockey-iq</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Skating Mechanics -->
+  <url>
+    <loc>https://www.viennahockeylab.com/skating-mechanics</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>
