@@ -16,7 +16,7 @@ const EishockeyTrainingWien: React.FC<Props> = ({ onShowLegal }) => {
             <SEO 
                 title="Eishockey Einzeltraining Wien | Vienna Hockey Lab"
                 description="Professionelles Eishockey-Einzeltraining in Wien. Skating, Shooting, Stickhandling & Hockey IQ. Trainiere mit lizenzierten Coaches im EisRing Süd. Jetzt buchen!"
-                canonical="https://viennahockeylab.com/de"
+                canonical="https://www.viennahockeylab.com/de"
             />
 
             {/* Navigation Back */}

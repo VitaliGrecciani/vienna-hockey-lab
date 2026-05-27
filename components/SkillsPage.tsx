@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { Zap, Target, Crosshair, Brain, Activity, Shield } from 'lucide-react';
 import FractalBackground from './FractalBackground';
+import SEO from './SEO';
 
 const SkillsPage: React.FC = () => {
     const { hash } = useLocation();
@@ -59,11 +60,11 @@ const SkillsPage: React.FC = () => {
     return (
         <section className="min-h-screen pt-24 pb-12 px-4 relative overflow-hidden bg-transparent text-white">
 
-            {/* SEO Metadata (Hidden) */}
-            <div className="hidden">
-                <title>Elite Hockey Skills Training Vienna | 6 Pillars of Performance</title>
-                <meta name="description" content="Advanced technical development at EisRing Süd. Six specialized labs: Skills Training, Skating Mechanics, Stickhandling, Shooting Mechanics, Neuromuscular Coordination, and Strategic Hockey IQ. ZVR: 1999424312. Wir sprechen Deutsch, we speak English, мы говорим по-русски." />
-            </div>
+            <SEO 
+                title="Elite Hockey Skills Training Vienna | 6 Pillars of Performance"
+                description="Advanced technical development at EisRing Süd. Six specialized labs: Skills Training, Skating Mechanics, Stickhandling, Shooting Mechanics, Neuromuscular Coordination, and Strategic Hockey IQ."
+                canonical="https://www.viennahockeylab.com/skills"
+            />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Navigation Back - Restored Hover Style & Clickability */}

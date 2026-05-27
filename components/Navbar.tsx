@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
 
     const links = [
         { name: "Home", path: "/" },
-        { name: "Einzeltraining Wien (DE)", path: "/eishockey-training-wien" },
+        { name: "Einzeltraining Wien (DE)", path: "/de" },
         { name: "Services", path: "/services" },
         { name: "Coaches", path: "/coaches" },
         { name: "Contact", path: "/contact" }

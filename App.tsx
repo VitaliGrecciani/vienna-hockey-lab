@@ -12,6 +12,7 @@ import Legal from './components/Legal';
 import SkillsPage from './components/SkillsPage';
 import EishockeyTrainingWien from './components/EishockeyTrainingWien';
 import { IndividualTraining, HockeyIQ, SkatingMechanics } from './components/NichePages';
+import { ContactPage, CoachesPage, ServicesPage } from './components/SitePages';
 import { AnimatePresence } from 'framer-motion';
 
 // Main Landing Page Component
@@ -60,6 +61,11 @@ const AppContent: React.FC = () => {
           <Route path="/individual-training" element={<IndividualTraining onShowLegal={() => setShowLegal(true)} />} />
           <Route path="/hockey-iq" element={<HockeyIQ onShowLegal={() => setShowLegal(true)} />} />
           <Route path="/skating-mechanics" element={<SkatingMechanics onShowLegal={() => setShowLegal(true)} />} />
+
+          {/* Main Site Pages */}
+          <Route path="/services" element={<ServicesPage onShowLegal={() => setShowLegal(true)} />} />
+          <Route path="/coaches" element={<CoachesPage onShowLegal={() => setShowLegal(true)} />} />
+          <Route path="/contact" element={<ContactPage onShowLegal={() => setShowLegal(true)} />} />
 
           {/* German SEO Landing Page */}
           <Route path="/de" element={<EishockeyTrainingWien onShowLegal={() => setShowLegal(true)} />} />

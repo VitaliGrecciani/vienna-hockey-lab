@@ -9,7 +9,7 @@ export const IndividualTraining: React.FC<{ onShowLegal: () => void }> = ({ onSh
         <SEO 
             title="Individual Hockey Coaching Vienna | Elite 1-on-1"
             description="Premium individual hockey training in Vienna. 1-on-1 sessions designed for surgical deconstruction of your mechanics and maximizing your game impact."
-            canonical="https://viennahockeylab.com/individual-training"
+            canonical="https://www.viennahockeylab.com/individual-training"
         />
         <article className="pt-32 pb-24 px-4 max-w-4xl mx-auto relative z-10">
             <motion.h1 
@@ -37,7 +37,7 @@ export const HockeyIQ: React.FC<{ onShowLegal: () => void }> = ({ onShowLegal })
         <SEO 
             title="Hockey IQ & Video Analysis Training | Vienna"
             description="Sharpen your Hockey IQ in Vienna. Strategic hockey intelligence training, video analysis, and situational awareness."
-            canonical="https://viennahockeylab.com/hockey-iq"
+            canonical="https://www.viennahockeylab.com/hockey-iq"
         />
         <article className="pt-32 pb-24 px-4 max-w-4xl mx-auto relative z-10">
             <motion.h1 
@@ -65,7 +65,7 @@ export const SkatingMechanics: React.FC<{ onShowLegal: () => void }> = ({ onShow
         <SEO 
             title="Power Skating Mechanics Vienna | Hockey Training"
             description="Deep dive into power skating, edge control, and explosive starts in Vienna. Maximize your hockey speed and agility."
-            canonical="https://viennahockeylab.com/skating-mechanics"
+            canonical="https://www.viennahockeylab.com/skating-mechanics"
         />
         <article className="pt-32 pb-24 px-4 max-w-4xl mx-auto relative z-10">
             <motion.h1 
