@@ -17,19 +17,22 @@ const coaches: Coach[] = [
     name: "Dmitry Tabatadze",
     role: "Head Coach",
     experience: ["CSKA Moscow school", "Played in Russian Professional Leagues MHL/VHL/KHL", "Licensed hockey coach"],
-    image: "/coach-dmitry.jpg"
+    image: "/coach-dmitry.jpg",
+    phone: "+43 677 64452839"
   },
   {
     name: "Kirill Kurochkin",
     role: "Skills Specialist",
     experience: ["Avangard Omsk School", "Vienna Capitals u18-20 pro-coach", "Licensed hockey coach"],
-    image: "/coach-vladimir.jpg" // Swapped: This is actually Kirill (bearded)
+    image: "/coach-vladimir.jpg", // Swapped: This is actually Kirill (bearded)
+    phone: "+43 660 6234494"
   },
   {
     name: "Vladimir Borodenko",
     role: "Development Coach",
     experience: ["Played in USA Leagues", "Czech Republic League pro experienced"],
-    image: "/coach-kirill.jpg" // Swapped: This is actually Vladimir (in white)
+    image: "/coach-kirill.jpg", // Swapped: This is actually Vladimir (in white)
+    phone: "+420 723 571 275"
   }
 ];
 
@@ -113,6 +116,26 @@ const CoachCard: React.FC<{ coach: Coach, index: number }> = ({ coach, index }) 
               (e.target as HTMLImageElement).src = "https://via.placeholder.com/400x500/111111/FFFFFF?text=COACH+PHOTO";
             }}
           />
+          {/* Dynamic Contact Details Overlay */}
+          <motion.div 
+            className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/90 to-transparent pt-16 pb-6 px-6 text-center flex flex-col items-center justify-end"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 15 }}
+            transition={{ delay: 0.35, duration: 0.4 }}
+          >
+            <span className="text-red-500 font-mono text-[10px] uppercase tracking-widest font-bold mb-1">
+              Individual Training
+            </span>
+            <a 
+              href={`tel:${coach.phone.replace(/\s+/g, '')}`} 
+              className="text-white text-xl md:text-2xl font-black font-orbitron hover:text-red-500 transition-colors mb-2 tracking-wide block"
+            >
+              {coach.phone}
+            </a>
+            <p className="text-gray-300 text-[11px] font-semibold leading-snug max-w-[220px]">
+              To book an individual training, call the coach directly
+            </p>
+          </motion.div>
         </motion.div>
 
       </div>

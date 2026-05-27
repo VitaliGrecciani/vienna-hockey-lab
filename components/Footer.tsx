@@ -53,6 +53,47 @@ const Footer: React.FC<FooterProps> = ({ onShowLegal }) => {
         </div>
       </div>
 
+      {/* Shimmering Coach Contacts Box */}
+      <div className="max-w-4xl mx-auto mt-12 mb-6 relative group">
+        {/* Glow effect */}
+        <div className="absolute -inset-0.5 bg-gradient-to-r from-red-600 via-orange-600 via-yellow-500 via-red-600 to-red-600 rounded-xl blur opacity-50 group-hover:opacity-75 transition duration-1000 animate-shimmer bg-[length:200%_auto]"></div>
+        
+        {/* Animated shifting border wrapper */}
+        <div className="relative p-[1.5px] rounded-xl bg-gradient-to-r from-red-600 via-orange-600 via-yellow-500 via-red-600 to-red-600 animate-shimmer bg-[length:200%_auto]">
+          <div className="relative bg-black/95 rounded-[10px] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="text-center md:text-left">
+              <h4 className="text-lg md:text-xl font-black uppercase text-white font-orbitron tracking-wide">
+                For Individual Training
+              </h4>
+              <p className="text-red-500 font-mono text-xs uppercase tracking-widest mt-1 font-bold">
+                Call our coaches directly
+              </p>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-6 md:gap-8 text-center sm:text-left">
+              <div className="flex flex-col">
+                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Dmitry</span>
+                <a href="tel:+4367764452839" className="text-white hover:text-red-500 transition-colors font-orbitron font-bold text-sm mt-0.5">
+                  +43 677 64452839
+                </a>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Kirill</span>
+                <a href="tel:+436606234494" className="text-white hover:text-red-500 transition-colors font-orbitron font-bold text-sm mt-0.5">
+                  +43 660 6234494
+                </a>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Vladimir</span>
+                <a href="tel:+420723571275" className="text-white hover:text-red-500 transition-colors font-orbitron font-bold text-sm mt-0.5">
+                  +420 723 571 275
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Нижняя плашка */}
       <div className="max-w-7xl mx-auto mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-6 text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold text-center">
         <div className="flex-1 hidden md:block" /> {/* Spacer */}

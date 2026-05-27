@@ -3,6 +3,7 @@ export interface Coach {
   role: string;
   experience: string[];
   image: string;
+  phone: string;
 }
 
 export interface TrainingModule {
