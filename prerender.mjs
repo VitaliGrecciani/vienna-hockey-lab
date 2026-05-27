@@ -61,6 +61,14 @@ async function run() {
             }
         } catch (e) {
             console.error('Error during prerendering:', e);
+            if (process.env.VERCEL) {
+                console.warn('⚠️ Prerendering skipped on Vercel. Using client-side SPA fallback.');
+                if (browser) {
+                    try { await browser.close(); } catch (_) {}
+                }
+                server.close();
+                process.exit(0);
+            }
             process.exit(1);
         } finally {
             if (browser) await browser.close();
